@@ -82,7 +82,7 @@ def delete_object_handler(path):
 def put_object_handler(path, file: UploadFile = File(...)):
   path = b64decode(path).decode('utf-8')
   file_name = file.filename
-  result, err = s3.put_object('{}/{}'.format(path, file_name), file.file.read())
+  result, err = s3.put_object('{}{}'.format(path, file_name), file.file.read())
   if result:
     return JSONResponse(content={"msg": "hey"}, status_code=status.HTTP_200_OK)
   raise HTTPException(
